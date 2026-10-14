@@ -1,142 +1,144 @@
-# ⚖️ The Tiebreaker — App para toma de decisiones
+# ⚖️ The Tiebreaker — Decision-Making App
 
-Aplicación web que ayuda a definir los **pros y contras** de cada decisión importante. Describes tu dilema, indicas las opciones que estás considerando y la app, apoyada en la API de **Google Gemini**, genera un análisis estructurado y un veredicto claro para ayudarte a "desempatar".
+🌐 **English** | [Português (Brasil)](README.pt-BR.md)
 
-> ⚠️ **Estado del proyecto:** prototipo / prueba de concepto. Las pruebas continúan y puede haber cambios.
+A web app that helps you weigh the **pros and cons** of any important decision. Describe your dilemma, list the options you are considering, and the app — powered by the **Google Gemini** API — generates a structured analysis and a clear verdict to help you break the tie.
 
----
-
-## ✨ Funcionalidades
-
-Para cada decisión, la app genera:
-
-1. **Resumen ejecutivo** del dilema en 2–3 frases.
-2. **Pros y contras ponderados** por opción, con peso de impacto (1–5), categoría temática, explicación y sugerencia de mitigación para los contras.
-3. **Matriz comparativa multicriterio** con notas de 1 a 10 y una justificación breve por criterio (por ejemplo: retorno a largo plazo, estrés/bienestar, reversibilidad, alineación con valores personales, velocidad de ejecución).
-4. **Análisis SWOT (FODA)** — fortalezas, debilidades, oportunidades y amenazas — para cada opción.
-5. **Veredicto del Tiebreaker**:
-   - Opción recomendada y nivel de confianza.
-   - El factor decisivo ("The Clincher").
-   - Pregunta de intuición (*gut check*).
-   - Puntos ciegos y sesgos cognitivos.
-   - Plan de acción inmediato en 3 pasos, con plazos.
-
-Además:
-
-- **Sugerencia de opciones:** si no sabes qué alternativas considerar, la app propone 2–3 caminos concretos a partir del título de tu dilema.
-- **Preguntas de seguimiento:** puedes consultar dudas adicionales al Tiebreaker una vez emitido el veredicto.
-- **Opciones vagas:** si una opción expresa duda o inercia (ej. "no sé", "dejar pasar"), la IA está instruida para cuestionarla y mostrar el costo oculto de no decidir.
-- **Multilenguaje:** análisis en portugués (`pt`, por defecto) e inglés (`en`).
-- **Modo de respaldo (fallback):** si el servicio de IA está ocupado, limitado o falla, el servidor devuelve un análisis estratégico genérico generado localmente (marcado con `isFallback: true`), para que la app siga funcionando.
+> ⚠️ **Project status:** prototype / proof of concept. Testing is still ongoing and things may change.
 
 ---
 
-## 🧰 Tecnologías
+## ✨ Features
 
-| Área | Herramientas |
+For each decision, the app generates:
+
+1. **Executive summary** of the dilemma in 2–3 sentences.
+2. **Weighted pros and cons** for each option, with an impact weight (1–5), a thematic category, an explanation, and mitigation advice for the cons.
+3. **Multi-criteria comparison matrix** with scores from 1 to 10 and a short rationale per criterion (e.g. long-term upside, stress/wellbeing, reversibility, personal values alignment, execution speed).
+4. **SWOT analysis** — strengths, weaknesses, opportunities and threats — for each option.
+5. **The Tiebreaker Verdict**:
+   - Recommended option and confidence level.
+   - The decisive factor ("The Clincher").
+   - An intuitive gut-check question.
+   - Cognitive blind spots and biases.
+   - An immediate 3-step action plan with timelines.
+
+Also:
+
+- **Option suggestions:** if you don't know which alternatives to consider, the app proposes 2–3 concrete paths based on your dilemma title.
+- **Follow-up questions:** once you have a verdict, you can ask the Tiebreaker additional questions.
+- **Vague options:** if an option expresses hesitation or inertia (e.g. "I don't know", "wait and see"), the AI is instructed to challenge it and expose the hidden cost of not deciding.
+- **Bilingual:** analysis in Portuguese (`pt`, default) and English (`en`).
+- **Fallback mode:** if the AI service is busy, rate-limited or fails, the server returns a generic strategic analysis generated locally (flagged with `isFallback: true`), so the app keeps working.
+
+---
+
+## 🧰 Tech Stack
+
+| Area | Tools |
 | --- | --- |
-| Frontend | React 19, Vite, Tailwind CSS 4, Motion (animaciones), Lucide React (íconos), canvas-confetti |
-| Backend | Node.js + Express, ejecutado con `tsx` |
-| IA | Google Gemini mediante el SDK `@google/genai` |
-| Lenguaje | TypeScript |
-| Gestor de paquetes | Bun (`bun.lock`); también funciona con npm |
+| Frontend | React 19, Vite, Tailwind CSS 4, Motion (animations), Lucide React (icons), canvas-confetti |
+| Backend | Node.js + Express, run with `tsx` |
+| AI | Google Gemini via the `@google/genai` SDK |
+| Language | TypeScript |
+| Package manager | Bun (`bun.lock`); npm also works |
 
 ---
 
-## 📁 Estructura del repositorio
+## 📁 Repository Structure
 
 ```
 .
-├── src/             # Código del frontend (React)
-├── server.ts        # Servidor Express: API + integración con Gemini + Vite
-├── index.html       # Punto de entrada HTML de la app
-├── vite.config.ts   # Configuración de Vite
-├── tsconfig.json    # Configuración de TypeScript
-├── package.json     # Dependencias y scripts
-├── bun.lock         # Lockfile de Bun
-├── metadata.json    # Metadatos de la aplicación
-├── .env.example     # Plantilla de variables de entorno
+├── src/             # Frontend code (React)
+├── server.ts        # Express server: API + Gemini integration + Vite
+├── index.html       # App HTML entry point
+├── vite.config.ts   # Vite configuration
+├── tsconfig.json    # TypeScript configuration
+├── package.json     # Dependencies and scripts
+├── bun.lock         # Bun lockfile
+├── metadata.json    # App metadata
+├── .env.example     # Environment variables template
 └── .gitignore
 ```
 
 ---
 
-## 🚀 Instalación y uso local
+## 🚀 Getting Started
 
-### Requisitos
+### Requirements
 
-- [Bun](https://bun.sh) o [Node.js](https://nodejs.org) (v18 o superior recomendado)
-- Una API key de Gemini ([Google AI Studio](https://aistudio.google.com/apikey))
+- [Bun](https://bun.sh) or [Node.js](https://nodejs.org) (v18 or higher recommended)
+- A Gemini API key ([Google AI Studio](https://aistudio.google.com/apikey))
 
-### Pasos
+### Steps
 
-1. **Clona el repositorio**
+1. **Clone the repository**
 
    ```bash
    git clone https://github.com/MachineBrAr/App-para-toma-de-decis-o.git
    cd App-para-toma-de-decis-o
    ```
 
-2. **Instala las dependencias**
+2. **Install dependencies**
 
    ```bash
    bun install
-   # o
+   # or
    npm install
    ```
 
-3. **Configura las variables de entorno**
+3. **Set up environment variables**
 
    ```bash
    cp .env.example .env
    ```
 
-   Edita `.env` y completa tus valores:
+   Edit `.env` and fill in your values:
 
    ```env
-   GEMINI_API_KEY="tu_api_key_de_gemini"
+   GEMINI_API_KEY="your_gemini_api_key"
    APP_URL="http://localhost:3000"
    ```
 
-4. **Inicia el servidor de desarrollo**
+4. **Start the development server**
 
    ```bash
    bun run dev
-   # o
+   # or
    npm run dev
    ```
 
-   La app queda disponible en **http://localhost:3000** (puedes cambiar el puerto con la variable `PORT`).
+   The app will be available at **http://localhost:3000** (change the port with the `PORT` variable).
 
-> Sin `GEMINI_API_KEY` el servidor arranca igualmente, pero los endpoints de análisis responderán con error o con contenido de respaldo.
+> Without `GEMINI_API_KEY` the server still starts, but the analysis endpoints will return an error or fallback content.
 
 ---
 
-## 🔐 Variables de entorno
+## 🔐 Environment Variables
 
-| Variable | Descripción | Obligatoria |
+| Variable | Description | Required |
 | --- | --- | --- |
-| `GEMINI_API_KEY` | Clave de la API de Gemini para el análisis con IA | Sí |
-| `APP_URL` | URL donde se aloja la app (enlaces propios, callbacks) | No (local) |
-| `PORT` | Puerto del servidor (por defecto `3000`) | No |
-| `DISABLE_HMR` | Si vale `true`, desactiva el hot reload de Vite en desarrollo | No |
+| `GEMINI_API_KEY` | Gemini API key used for AI analysis | Yes |
+| `APP_URL` | URL where the app is hosted (self-links, callbacks) | No (local) |
+| `PORT` | Server port (default `3000`) | No |
+| `DISABLE_HMR` | If `true`, disables Vite hot reload in development | No |
 
-⚠️ **Nunca subas tu archivo `.env` al repositorio.** La clave se usa solo en el servidor y no se expone al navegador.
+⚠️ **Never commit your `.env` file.** The key is used only on the server and is not exposed to the browser.
 
 ---
 
-## 📜 Scripts disponibles
+## 📜 Available Scripts
 
-| Comando | Descripción |
+| Command | Description |
 | --- | --- |
-| `dev` | Inicia el servidor con Vite en modo desarrollo |
-| `build` | Genera el build de producción en `dist/` |
-| `start` | Inicia el servidor en modo producción (sirve `dist/`) |
-| `preview` | Previsualiza el build con Vite |
-| `lint` | Verifica los tipos con TypeScript (`tsc --noEmit`) |
-| `clean` | Elimina `dist` y `server.js` |
+| `dev` | Starts the server with Vite in development mode |
+| `build` | Creates the production build in `dist/` |
+| `start` | Starts the server in production mode (serves `dist/`) |
+| `preview` | Previews the build with Vite |
+| `lint` | Type-checks with TypeScript (`tsc --noEmit`) |
+| `clean` | Removes `dist` and `server.js` |
 
-Para producción:
+For production:
 
 ```bash
 bun run build
@@ -147,69 +149,69 @@ bun run start
 
 ## 🔌 API
 
-Todos los endpoints son `POST` con cuerpo JSON, salvo el *health check*.
+All endpoints are JSON `POST` requests, except the health check.
 
 ### `GET /api/health`
-Verifica que el servidor esté activo e indica si hay API key configurada.
+Checks that the server is running and whether an API key is configured.
 
 ```json
 { "status": "ok", "hasApiKey": true }
 ```
 
 ### `POST /api/analyze-decision`
-Genera el análisis completo de una decisión.
+Generates the full analysis of a decision.
 
 ```json
 {
-  "title": "¿Cambiar de trabajo o quedarme donde estoy?",
-  "context": "Contexto adicional (opcional)",
-  "options": ["Cambiar de trabajo", "Quedarme"],
-  "priorities": ["Estabilidad", "Crecimiento"],
-  "language": "pt"
+  "title": "Should I change jobs or stay where I am?",
+  "context": "Optional extra context",
+  "options": ["Change jobs", "Stay"],
+  "priorities": ["Stability", "Growth"],
+  "language": "en"
 }
 ```
 
-- `title` es obligatorio.
-- Si se envían menos de 2 opciones válidas, se usan dos opciones por defecto ("seguir adelante" / "mantener el status quo").
-- Respuesta: `summary`, `optionsAnalysis`, `comparisonMatrix` y `verdict`.
+- `title` is required.
+- If fewer than 2 valid options are sent, two default options are used ("proceed" / "maintain status quo").
+- Response: `summary`, `optionsAnalysis`, `comparisonMatrix` and `verdict`.
 
 ### `POST /api/suggest-options`
-Sugiere 2–3 opciones concretas a partir del título del dilema.
+Suggests 2–3 concrete options based on the dilemma title.
 
 ```json
-{ "title": "¿Debo mudarme de ciudad?", "context": "", "language": "pt" }
+{ "title": "Should I move to another city?", "context": "", "language": "en" }
 ```
 
-Respuesta: `{ "options": ["...", "..."] }`
+Response: `{ "options": ["...", "..."] }`
 
 ### `POST /api/ask-tiebreaker`
-Responde una pregunta de seguimiento sobre la decisión y su veredicto.
+Answers a follow-up question about the decision and its verdict.
 
 ```json
 {
   "decisionTitle": "...",
   "currentVerdict": "...",
-  "question": "¿Y si el salario baja un 10%?",
-  "language": "pt"
+  "question": "What if my salary drops by 10%?",
+  "language": "en"
 }
 ```
 
-Respuesta: `{ "answer": "..." }`
+Response: `{ "answer": "..." }`
 
 ---
 
-## ⚠️ Aviso
+## ⚠️ Disclaimer
 
-Las recomendaciones generadas por IA son una **ayuda para reflexionar**, no un sustituto del criterio propio ni de asesoramiento profesional (financiero, legal, médico, etc.). La decisión final siempre es tuya.
+AI-generated recommendations are an **aid to reflection**, not a substitute for your own judgment or for professional advice (financial, legal, medical, etc.). The final decision is always yours.
 
 ---
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto es de **dominio público**. Cualquier persona puede copiarlo, modificarlo, distribuirlo y usarlo, con fines personales o comerciales, sin necesidad de pedir permiso ni dar atribución.
+This project is in the **public domain**. Anyone may copy, modify, distribute and use it, for personal or commercial purposes, without asking permission or giving attribution.
 
-Se distribuye "tal cual", sin garantía de ningún tipo.
+It is provided "as is", without warranty of any kind.
 
-## 👤 Autor
+## 👤 Author
 
-Desarrollado por [MachineBrAr](https://github.com/MachineBrAr).
+Developed by [MachineBrAr](https://github.com/MachineBrAr).
